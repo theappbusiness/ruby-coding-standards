@@ -1,3 +1,23 @@
+# TAB gemified standards
+
+This style guide has been gemified to add default gems for checking
+your code against and to do basic checks that we should all be doing regularly.
+
+Add this to your development dependencies:
+
+  ```
+  gem 'ruby-style-guide', git: 'git@github.com:theappbusiness/ruby-style-guide.git', tag: 'current'
+  ```
+
+Bundle then run this to produce reports
+
+  ```
+  $ check_code
+  ```
+
+If changes are made to the style guide these should be added to the .rubocop.yml
+as per [These docs](https://github.com/bbatsov/rubocop/blob/master/config/default.yml)
+
 # Prelude
 
 > Role models are important. <br/>

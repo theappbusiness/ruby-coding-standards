@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: check_code [options]"
+
+  opts.on("-R", "--rails", "Run rails cops") do |r|
+    options[:rails] = r
+  end
+end.parse!
+
+puts "Running reports"
+
+`rubocop . -o rubocop.txt`
+puts "rubocop.txt generated"
+
+`bundle-audit > bundler-audit.txt`
+puts "bundler-audit.txt generated"
+
+if options[:rails]
+  `rubocop . -R -o rubocop-rails.txt`
+  puts "rubocop-rails.txt generated"
+end
