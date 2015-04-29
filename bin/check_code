@@ -1,4 +1,2 @@
-#!/usr/bin/env bash
-
-rubocop .
-bundle-audit
+puts `rubocop .`
+puts `bundle-audit`

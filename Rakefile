@@ -19,7 +19,9 @@ Jeweler::Tasks.new do |gem|
   gem.summary = 'Gem to apply TAB code policies'
   gem.description = 'Run check_code to check code against policies'
   gem.email = 'will@theappbusiness.com'
-  gem.authors = []
+  gem.authors = ["Will Thomas"]
+  gem.add_dependency 'rubocop', '~> 0'
+  gem.add_dependency 'bundler-audit', '~> 0'
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
