@@ -1,3 +1,13 @@
+# TAB modifications
+
+This style guide has been gemified to add default gems for checking
+your code against and to do basic checks that we should all be doing regularly.
+
+```
+  $ check_code [ DIRECTORY_TO_CHECK ]
+```
+
+
 # Prelude
 
 > Role models are important. <br/>
