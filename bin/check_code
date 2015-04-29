@@ -1,2 +1,2 @@
-puts `rubocop .`
-puts `bundle-audit`
+puts `rubocop . -o rubocop.txt`
+puts `bundle-audit > bundler-audit.txt`
