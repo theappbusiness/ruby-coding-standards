@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env ruby
 
 require 'optparse'
@@ -23,3 +24,8 @@ if options[:rails]
   `rubocop . -R -o rubocop-rails.txt`
   puts "rubocop-rails.txt generated"
 end
+||||||| merged common ancestors
+=======
+puts `rubocop . -o rubocop.txt`
+puts `bundle-audit > bundler-audit.txt`
+>>>>>>> current

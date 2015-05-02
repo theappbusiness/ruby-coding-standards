@@ -6,7 +6,7 @@ your code against and to do basic checks that we should all be doing regularly.
 Add this to your development dependencies:
 
   ```
-  gem 'ruby-style-guide', git: 'git@github.com:theappbusiness/ruby-style-guide.git', tag: 'current'
+  gem 'ruby-style-guide', git: 'git@github.com:Whimsical-Doodles/ruby-style-guide.git', tag: 'current'
   ```
 
 Bundle then run this to produce reports
