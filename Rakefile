@@ -18,8 +18,8 @@ Jeweler::Tasks.new do |gem|
   gem.license = 'MIT'
   gem.summary = 'Gem to apply TAB code policies'
   gem.description = 'Run check_code to check code against policies'
-  gem.email = 'will@theappbusiness.com'
-  gem.authors = ["Will Thomas"]
+  gem.email = 'felix@whimsicaldoodles.com'
+  gem.authors = ["Felix Hawkins"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

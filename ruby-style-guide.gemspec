@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
-  s.authors = ["Will Thomas"]
+  s.authors = ["Felix Hawkins"]
   s.date = "2015-05-02"
   s.description = "Run check_code to check code against policies"
-  s.email = "will@theappbusiness.com"
+  s.email = "felix@whimsicaldoodles.com"
   s.executables = ["check_code"]
   s.extra_rdoc_files = [
     "LICENSE.txt",

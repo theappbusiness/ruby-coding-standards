@@ -1,4 +1,4 @@
-# TAB gemified standards
+# Gemified application of standards
 
 This style guide has been gemified to add default gems for checking
 your code against and to do basic checks that we should all be doing regularly.
