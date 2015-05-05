@@ -25,12 +25,20 @@ OptionParser.new do |opts|
     options[:audit] = r
   end
 
-  opts.on('-R', '--rails', 'Run rubocop for rails') do |r|
+  opts.on('-R', '--rails', 'Run rubocop with rails') do |r|
     options[:rails] = r
   end
 
-  opts.on('-L', '--lint', 'Run rubocop lint only') do |r|
+  opts.on('-L', '--lint', 'Run rubocop lint') do |r|
     options[:lint] = r
+  end
+
+  opts.on('-B', '--brakeman', 'Run brakeman') do |r|
+    options[:brake] = r
+  end
+
+  opts.on('-T', '--rubycritic', 'Run rubycritic') do |r|
+    options[:critic] = r
   end
 
   opts.on('-E', '--error', 'Return error for failure') do |r|
@@ -48,14 +56,18 @@ OUTPUT_COMMANDS = {
   cop: 'rubocop .',
   audit: 'bundle-audit',
   rails: 'rubocop . --rails',
-  lint: 'rubocop . -l'
+  lint: 'rubocop . -l',
+  brake: 'brakeman',
+  critic: 'rubycritic',
 }
 
 FILE_COMMANDS = {
   cop: 'rubocop . -o rubocop.txt',
   audit: 'bundle-audit > bundler-audit.txt',
   rails: 'rubocop . --rails -o rubocop-rails.txt',
-  lint: 'rubocop . -l -o rubocop-lint.txt'
+  lint: 'rubocop . -l -o rubocop-lint.txt',
+  brake: 'brakeman',
+  critic: 'rubycritic',
 }
 
 if options[:output]
