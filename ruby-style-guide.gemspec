@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Felix Hawkins"]
-  s.date = "2015-05-02"
+  s.date = "2015-05-05"
   s.description = "Run check_code to check code against policies"
   s.email = "felix@whimsicaldoodles.com"
   s.executables = ["check_code"]
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/theappbusiness/ruby-style-guide"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.5"
+  s.rubygems_version = "2.4.6"
   s.summary = "Gem to apply TAB code policies"
 
   if s.respond_to? :specification_version then

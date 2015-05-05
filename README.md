@@ -7,12 +7,19 @@ Add this to your development dependencies:
 
   ```
   gem 'ruby-style-guide', git: 'git@github.com:Whimsical-Doodles/ruby-style-guide.git'
+  bundle install --binstubs
   ```
 
-Bundle then run this to produce reports
+You should then be able to run this to produce reports:
 
   ```
-  $ check_code
+  $ check_code [OPTIONS]
+  ```
+
+For runtime options run:
+
+  ```
+  $ check_code --help
   ```
 
 If changes are made to the style guide these should be added to the .rubocop.yml

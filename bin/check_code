@@ -1,25 +1,72 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
+require 'open3'
+
+def run_command(command)
+  _, stdout, stderr, wait_thr = Open3.popen3(command)
+  result = { stdout: stdout.gets(nil), stderr: stderr.gets(nil) }
+  stdout.close
+  stderr.close
+  raise "'#{command}' failed: #{result}" if wait_thr.value.exitstatus != 0 && ERROR
+  result
+end
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: check_code [options]"
+  opts.banner = 'Usage: check_code [options]'
 
-  opts.on("-R", "--rails", "Run rails cops") do |r|
+  opts.on('-C', '--cop', 'Run rubocop') do |r|
+    options[:cop] = r
+  end
+
+  opts.on('-A', '--audit', 'Run bundle-audit') do |r|
+    options[:audit] = r
+  end
+
+  opts.on('-R', '--rails', 'Run rubocop for rails') do |r|
     options[:rails] = r
+  end
+
+  opts.on('-L', '--lint', 'Run rubocop lint only') do |r|
+    options[:lint] = r
+  end
+
+  opts.on('-E', '--error', 'Return error for failure') do |r|
+    options[:error] = r
+  end
+
+  opts.on('-O', '--output', 'Print to stdout not files') do |r|
+    options[:output] = r
   end
 end.parse!
 
-puts "Running reports"
+ERROR = options[:error]
 
-`rubocop . -o rubocop.txt`
-puts "rubocop.txt generated"
+OUTPUT_COMMANDS = {
+  cop: 'rubocop .',
+  audit: 'bundle-audit',
+  rails: 'rubocop . --rails',
+  lint: 'rubocop . -l'
+}
 
-`bundle-audit > bundler-audit.txt`
-puts "bundler-audit.txt generated"
+FILE_COMMANDS = {
+  cop: 'rubocop . -o rubocop.txt',
+  audit: 'bundle-audit > bundler-audit.txt',
+  rails: 'rubocop . --rails -o rubocop-rails.txt',
+  lint: 'rubocop . -l -o rubocop-lint.txt'
+}
 
-if options[:rails]
-  `rubocop . -R -o rubocop-rails.txt`
-  puts "rubocop-rails.txt generated"
+if options[:output]
+  puts 'Running reports interactively'
+  commands = OUTPUT_COMMANDS
+else
+  puts 'Exporting reports to file'
+  commands = FILE_COMMANDS
 end
+
+commands.each_pair do |key, command|
+  puts run_command(command)[:stdout] if options[key]
+end
+
+puts 'Reports complete'
