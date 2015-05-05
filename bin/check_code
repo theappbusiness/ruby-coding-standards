@@ -1,32 +1,47 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
 require 'optparse'
 require 'open3'
+
+include FileUtils
+
+default_output_dir = 'tmp'
+
+rubocop_rails_flag = ''
 
 def run_command(command)
   _, stdout, stderr, wait_thr = Open3.popen3(command)
   result = { stdout: stdout.gets(nil), stderr: stderr.gets(nil) }
   stdout.close
   stderr.close
-  fail "'#{command}' failed:
-    #{result}" if wait_thr.value.exitstatus != 0 && ERROR
+  if ERROR
+    fail "'#{command}' failed: #{result}" if wait_thr.value.exitstatus != 0
+  end
   result
 end
+
+ALL_COMMANDS = [:cop, :audit, :brake, :critic]
 
 options = {}
 OptionParser.new do |opts|
   opts.banner = 'Usage: check_code [options]'
+  opts.on('-A', '--all', 'Run all checks') do |r|
+    ALL_COMMANDS.each do |key|
+      options[key] = r
+    end
+  end
 
   opts.on('-C', '--cop', 'Run rubocop') do |r|
     options[:cop] = r
   end
 
-  opts.on('-A', '--audit', 'Run bundle-audit') do |r|
+  opts.on('-D', '--audit', 'Run bundle-audit') do |r|
     options[:audit] = r
   end
 
-  opts.on('-R', '--rails', 'Run rubocop with rails') do |r|
-    options[:rails] = r
+  opts.on('-R', '--rails', 'Run rubocop with rails') do |_|
+    rubocop_rails_flag = '-R'
   end
 
   opts.on('-L', '--lint', 'Run rubocop lint') do |r|
@@ -48,26 +63,31 @@ OptionParser.new do |opts|
   opts.on('-O', '--output', 'Print to stdout not files') do |r|
     options[:output] = r
   end
+
+  opts.on('-D', '--directory', 'Print to stdout not files') do |r|
+    options[:directory] = r
+  end
 end.parse!
+
+OUTPUT_DIR = (options[:directory] || default_output_dir)
+mkdir_p(OUTPUT_DIR)
 
 ERROR = options[:error]
 
 OUTPUT_COMMANDS = {
-  cop: 'rubocop .',
+  cop: "rubocop . #{rubocop_rails_flag}",
   audit: 'bundle-audit',
-  rails: 'rubocop . --rails',
   lint: 'rubocop . -l',
   brake: 'brakeman',
-  critic: 'rubycritic',
+  critic: 'rubycritic'
 }
 
 FILE_COMMANDS = {
-  cop: 'rubocop . -o rubocop.txt',
-  audit: 'bundle-audit > bundler-audit.txt',
-  rails: 'rubocop . --rails -o rubocop-rails.txt',
-  lint: 'rubocop . -l -o rubocop-lint.txt',
-  brake: 'brakeman',
-  critic: 'rubycritic',
+  cop: "rubocop . #{rubocop_rails_flag} -o #{OUTPUT_DIR}/rubocop.txt",
+  audit: "bundle-audit > #{OUTPUT_DIR}/bundler-audit.txt",
+  lint: "rubocop . -l -o #{OUTPUT_DIR}/rubocop-lint.txt",
+  brake: "brakeman -o #{OUTPUT_DIR}/brakeman.html",
+  critic: 'rubycritic'
 }
 
 if options[:output]
