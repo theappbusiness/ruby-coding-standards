@@ -8,7 +8,8 @@ def run_command(command)
   result = { stdout: stdout.gets(nil), stderr: stderr.gets(nil) }
   stdout.close
   stderr.close
-  raise "'#{command}' failed: #{result}" if wait_thr.value.exitstatus != 0 && ERROR
+  fail "'#{command}' failed:
+    #{result}" if wait_thr.value.exitstatus != 0 && ERROR
   result
 end
 
