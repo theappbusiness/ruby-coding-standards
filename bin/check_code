@@ -64,8 +64,8 @@ OptionParser.new do |opts|
     options[:output] = r
   end
 
-  opts.on('-D', '--directory', 'Print to stdout not files') do |r|
-    options[:directory] = r
+  opts.on('-F=DIRECTORY', '--directory=DIRECTORY', 'Set output directory') do |directory|
+    options[:directory] = directory
   end
 end.parse!
 
