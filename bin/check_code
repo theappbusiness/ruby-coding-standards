@@ -21,7 +21,7 @@ def run_command(command)
   result
 end
 
-ALL_COMMANDS = [:cop, :audit, :brake, :critic]
+ALL_COMMANDS = [:cop, :audit, :brake, :critic, :rails_b_p]
 
 options = {}
 OptionParser.new do |opts|
