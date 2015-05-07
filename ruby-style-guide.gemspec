@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Felix Hawkins"]
-  s.date = "2015-05-05"
+  s.date = "2015-05-07"
   s.description = "Run check_code to check code against policies"
   s.email = "felix@whimsicaldoodles.com"
   s.executables = ["check_code"]
@@ -32,7 +32,9 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/check_code",
-    "ruby-style-guide.gemspec"
+    "config/rails_best_practices.yml",
+    "ruby-style-guide.gemspec",
+    "tmp/.gitignore"
   ]
   s.homepage = "http://github.com/theappbusiness/ruby-style-guide"
   s.licenses = ["MIT"]
@@ -46,15 +48,24 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<jeweler>, ["~> 2.0.1"])
       s.add_runtime_dependency(%q<rubocop>, [">= 0"])
       s.add_runtime_dependency(%q<bundler-audit>, [">= 0"])
+      s.add_runtime_dependency(%q<brakeman>, [">= 0"])
+      s.add_runtime_dependency(%q<rubycritic>, [">= 0"])
+      s.add_runtime_dependency(%q<rails_best_practices>, [">= 0"])
     else
       s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
       s.add_dependency(%q<rubocop>, [">= 0"])
       s.add_dependency(%q<bundler-audit>, [">= 0"])
+      s.add_dependency(%q<brakeman>, [">= 0"])
+      s.add_dependency(%q<rubycritic>, [">= 0"])
+      s.add_dependency(%q<rails_best_practices>, [">= 0"])
     end
   else
     s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
     s.add_dependency(%q<rubocop>, [">= 0"])
     s.add_dependency(%q<bundler-audit>, [">= 0"])
+    s.add_dependency(%q<brakeman>, [">= 0"])
+    s.add_dependency(%q<rubycritic>, [">= 0"])
+    s.add_dependency(%q<rails_best_practices>, [">= 0"])
   end
 end
 
