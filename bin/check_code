@@ -56,6 +56,10 @@ OptionParser.new do |opts|
     options[:critic] = r
   end
 
+  opts.on('-B', '--best_practices', 'Run rails_best_practices') do |r|
+    options[:rails_b_p] = r
+  end
+
   opts.on('-E', '--error', 'Return error for failure') do |r|
     options[:error] = r
   end
@@ -79,7 +83,8 @@ OUTPUT_COMMANDS = {
   audit: 'bundle-audit',
   lint: 'rubocop . -l',
   brake: 'brakeman',
-  critic: 'rubycritic'
+  critic: 'rubycritic',
+  rails_b_p: 'rails_best_practices -e "db/migrate,vendor" .'
 }
 
 FILE_COMMANDS = {
@@ -87,7 +92,8 @@ FILE_COMMANDS = {
   audit: "bundle-audit > #{OUTPUT_DIR}/bundler-audit.txt",
   lint: "rubocop . -l -o #{OUTPUT_DIR}/rubocop-lint.txt",
   brake: "brakeman -o #{OUTPUT_DIR}/brakeman.html",
-  critic: 'rubycritic'
+  critic: 'rubycritic',
+  rails_b_p: "rails_best_practices -e 'db/migrate,vendor' -f html --output-file #{OUTPUT_DIR}/rails_best_practices.html ."
 }
 
 if options[:output]
