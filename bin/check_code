@@ -56,7 +56,7 @@ OptionParser.new do |opts|
     options[:critic] = r
   end
 
-  opts.on('-B', '--best_practices', 'Run rails_best_practices') do |r|
+  opts.on('-P', '--best_practices', 'Run rails_best_practices') do |r|
     options[:rails_b_p] = r
   end
 
@@ -72,7 +72,7 @@ OptionParser.new do |opts|
     options[:output] = r
   end
 
-  opts.on('-F=DIRECTORY', '--directory=DIRECTORY', 'Set output directory') do |directory|
+  opts.on('-F=DIRECTORY', '--directory=DIRECTORY', "Set output directory, defaults to #{default_output_dir}") do |directory|
     options[:directory] = directory
   end
 end.parse!
