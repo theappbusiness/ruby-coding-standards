@@ -21,7 +21,7 @@ def run_command(command)
   result
 end
 
-ALL_COMMANDS = [:cop, :audit, :brake, :critic, :rails_b_p]
+ALL_COMMANDS = [:cop, :audit, :brake, :critic, :rails_b_p, :sandi]
 
 options = {}
 OptionParser.new do |opts|
@@ -60,6 +60,10 @@ OptionParser.new do |opts|
     options[:rails_b_p] = r
   end
 
+  opts.on('-S', '--sandi', 'Run sandi_meter') do |r|
+    options[:sandi] = r
+  end
+
   opts.on('-E', '--error', 'Return error for failure') do |r|
     options[:error] = r
   end
@@ -84,7 +88,8 @@ OUTPUT_COMMANDS = {
   lint: 'rubocop . -l',
   brake: 'brakeman',
   critic: 'rubycritic',
-  rails_b_p: 'rails_best_practices -e "db/migrate,vendor" .'
+  rails_b_p: 'rails_best_practices -e "db/migrate,vendor" .',
+  sandi: 'sandi_meter'
 }
 
 FILE_COMMANDS = {
@@ -93,7 +98,8 @@ FILE_COMMANDS = {
   lint: "rubocop . -l -o #{OUTPUT_DIR}/rubocop-lint.txt",
   brake: "brakeman -o #{OUTPUT_DIR}/brakeman.html",
   critic: 'rubycritic',
-  rails_b_p: "rails_best_practices -e 'db/migrate,vendor' -f html --output-file #{OUTPUT_DIR}/rails_best_practices.html ."
+  rails_b_p: "rails_best_practices -e 'db/migrate,vendor' -f html --output-file #{OUTPUT_DIR}/rails_best_practices.html .",
+  sandi: "sandi_meter -g -o #{OUTPUT_DIR}/sandi_meter"
 }
 
 if options[:output]
