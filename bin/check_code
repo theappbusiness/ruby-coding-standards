@@ -114,8 +114,10 @@ end
 
 commands.each_pair do |key, command|
   command = [command, *options[:extra_arguments]].join(' ')
-  puts "Running '#{command}'"
-  puts run_command(command)[:stdout] if options[key]
+  if options[key]
+    puts "Running '#{command}'"
+    puts run_command(command)[:stdout]
+  end
 end
 
 puts "Reports complete"
