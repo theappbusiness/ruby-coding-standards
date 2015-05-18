@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 
-require 'fileutils'
-require 'optparse'
-require 'open3'
+require "fileutils"
+require "optparse"
+require "open3"
 
 include FileUtils
 
-default_output_dir = 'tmp'
+default_output_dir = "tmp"
 
-rubocop_rails_flag = ''
+rubocop_rails_flag = ""
 
 def run_command(command)
   _, stdout, stderr, wait_thr = Open3.popen3(command)
@@ -16,7 +16,7 @@ def run_command(command)
   stdout.close
   stderr.close
   if ERROR
-    fail "'#{command}' failed: #{result}" if wait_thr.value.exitstatus != 0
+    fail ""#{command}" failed: #{result}" if wait_thr.value.exitstatus != 0
   end
   result
 end
@@ -25,56 +25,58 @@ ALL_COMMANDS = [:cop, :audit, :brake, :critic, :rails_b_p, :sandi]
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = 'Usage: check_code [options]'
-  opts.on('-A', '--all', 'Run all checks') do |r|
+  opts.banner = "Usage: check_code [options] [extra_arguments]"
+  opts.on("-A", "Run all checks") do |r|
     ALL_COMMANDS.each do |key|
       options[key] = r
     end
   end
 
-  opts.on('-C', '--cop', 'Run rubocop') do |r|
+  opts.on("-C", "Run rubocop") do |r|
     options[:cop] = r
   end
 
-  opts.on('-D', '--audit', 'Run bundle-audit') do |r|
+  opts.on("-D", "Run bundle-audit") do |r|
     options[:audit] = r
   end
 
-  opts.on('-R', '--rails', 'Run rubocop with rails') do |_|
-    rubocop_rails_flag = '-R'
+  opts.on("-R", "Run rubocop with rails") do |_|
+    rubocop_rails_flag = "-R"
   end
 
-  opts.on('-L', '--lint', 'Run rubocop lint') do |r|
+  opts.on("-L", "Run rubocop lint") do |r|
     options[:lint] = r
   end
 
-  opts.on('-B', '--brakeman', 'Run brakeman') do |r|
+  opts.on("-B", "Run brakeman") do |r|
     options[:brake] = r
   end
 
-  opts.on('-T', '--rubycritic', 'Run rubycritic') do |r|
+  opts.on("-T", "Run rubycritic") do |r|
     options[:critic] = r
   end
 
-  opts.on('-P', '--best_practices', 'Run rails_best_practices') do |r|
+  opts.on("-P", "Run rails_best_practices") do |r|
     options[:rails_b_p] = r
   end
 
-  opts.on('-S', '--sandi', 'Run sandi_meter') do |r|
+  opts.on("-S", "Run sandi_meter") do |r|
     options[:sandi] = r
   end
 
-  opts.on('-E', '--error', 'Return error for failure') do |r|
+  opts.on("-E", "Return error for failure") do |r|
     options[:error] = r
   end
 
-  opts.on('-O', '--output', 'Print to stdout not files') do |r|
+  opts.on("-O", "Print to stdout not files") do |r|
     options[:output] = r
   end
 
-  opts.on('-F=DIRECTORY', '--directory=DIRECTORY', "Set output directory, defaults to #{default_output_dir}") do |directory|
+  opts.on("-F=DIRECTORY", "Set output directory, defaults to #{default_output_dir}") do |directory|
     options[:directory] = directory
   end
+
+  options[:extra_arguments] = opts.default_argv.select {|a| a !~ /^-/}
 end.parse!
 
 OUTPUT_DIR = (options[:directory] || default_output_dir)
@@ -83,35 +85,37 @@ mkdir_p(OUTPUT_DIR)
 ERROR = options[:error]
 
 OUTPUT_COMMANDS = {
-  cop: "rubocop . #{rubocop_rails_flag}",
-  audit: 'bundle-audit',
-  lint: 'rubocop . -l',
-  brake: 'brakeman',
-  critic: 'rubycritic',
-  rails_b_p: 'rails_best_practices -e "db/migrate,vendor" .',
-  sandi: 'sandi_meter'
+  cop: "rubocop #{rubocop_rails_flag}",
+  audit: "bundle-audit",
+  lint: "rubocop -l",
+  brake: "brakeman",
+  critic: "rubycritic",
+  rails_b_p: "rails_best_practices -e 'db/migrate,vendor'",
+  sandi: "sandi_meter"
 }
 
 FILE_COMMANDS = {
-  cop: "rubocop . #{rubocop_rails_flag} -o #{OUTPUT_DIR}/rubocop.txt",
+  cop: "rubocop #{rubocop_rails_flag} -o #{OUTPUT_DIR}/rubocop.txt",
   audit: "bundle-audit > #{OUTPUT_DIR}/bundler-audit.txt",
-  lint: "rubocop . -l -o #{OUTPUT_DIR}/rubocop-lint.txt",
+  lint: "rubocop -l -o #{OUTPUT_DIR}/rubocop-lint.txt",
   brake: "brakeman -o #{OUTPUT_DIR}/brakeman.html",
-  critic: 'rubycritic',
-  rails_b_p: "rails_best_practices -e 'db/migrate,vendor' -f html --output-file #{OUTPUT_DIR}/rails_best_practices.html .",
+  critic: "rubycritic",
+  rails_b_p: "rails_best_practices -e 'db/migrate,vendor' -f html --output-file #{OUTPUT_DIR}/rails_best_practices.html",
   sandi: "sandi_meter -g -o #{OUTPUT_DIR}/sandi_meter"
 }
 
 if options[:output]
-  puts 'Running reports interactively'
+  puts "Running reports interactively"
   commands = OUTPUT_COMMANDS
 else
-  puts 'Exporting reports to file'
+  puts "Exporting reports to file"
   commands = FILE_COMMANDS
 end
 
 commands.each_pair do |key, command|
+  command = [command, *options[:extra_arguments]].join(' ')
+  puts "Running '#{command}'"
   puts run_command(command)[:stdout] if options[key]
 end
 
-puts 'Reports complete'
+puts "Reports complete"
