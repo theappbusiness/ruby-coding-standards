@@ -1,3 +1,5 @@
 AllCops:
   Exclude:
     - '*.gemspec'
+Documentation:
+  Enabled: false
