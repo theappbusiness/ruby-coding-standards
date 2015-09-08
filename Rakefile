@@ -13,13 +13,14 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'ruby-style-guide'
-  gem.homepage = 'http://github.com/theappbusiness/ruby-style-guide'
+  gem.name = 'ruby-coding-standards'
+  gem.homepage = 'http://github.com/theappbusiness/ruby-coding-standards'
   gem.license = 'MIT'
-  gem.summary = 'Gem to apply TAB code policies'
+  gem.summary = 'Gem to check and apply TAB code policies'
   gem.description = 'Run check_code to check code against policies'
   gem.email = 'felix@whimsicaldoodles.com'
-  gem.authors = ['Felix Hawkins']
+  gem.authors = ['Felix Hawkins', 'Peter Hinterseer']
+  gem.extra_rdoc_files = ['LICENSE.txt', 'README.md', 'GEM.md', 'DESCRIPTION.md']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

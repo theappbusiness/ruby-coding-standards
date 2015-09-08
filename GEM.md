@@ -22,7 +22,7 @@ Add this to your Gemfile development dependencies (better not to default depende
 run):
 
   ```
-  gem 'ruby-style-guide', git: 'git@github.com:theappbusiness/ruby-style-guide.git'
+  gem 'ruby-coding-standards', git: 'git@github.com:theappbusiness/ruby-coding-standards.git', require: false
   ```
   
 Execute the following to install all the necessary gems and the check_code script. 
@@ -63,7 +63,7 @@ Please refer to the RuboCop documentation for more.
 
 ### RubyCritic (`-T`)
 
-The RubyCritic report can be found in tmp/rubycritic/overview.html
+The [RubyCritic][5] report can be found in tmp/rubycritic/overview.html
 
 In the 'Code'-tab, we try to keep as many files as possible at an A rating, only in well-founded cases, exceptions are
 allowed, keeping code smells, duplications, and code smells to a minimum.
@@ -73,9 +73,13 @@ improved.
 
 ### sandi_meter (`-S`)
 
-[Sandi Metz' four rules][11] are the following:
+[sandi_meter][10] checks your code for [Sandi Metz' four rules][11] and is called with the `-g` parameter by default
+when using `check_code`, opening a browser window if possible.
 
-...
+The HTML test report can be found in `tmp/sandi_meter/index.html` along with a config file (`config.yml`) and a database
+with previous report results (`sandi_meter.log`).
+
+
 
 
 
