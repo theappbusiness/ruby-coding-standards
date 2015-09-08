@@ -12,6 +12,6 @@ known security vulnerabilities to code complexity. Our philosophy is it should b
 
 Our Ruby coding standards:
 * [The description](DESCRIPTION.md)
-* [The gem](/GEM.rb)
+* [The gem](/GEM.md)
 
 You can find all the style guides from our other engineering teams [here](https://github.com/theappbusiness?utf8=✓&query=guide).
