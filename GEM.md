@@ -75,6 +75,7 @@ improved.
 
 [Sandi Metz' four rules][11] are the following:
 
+...
 
 
 
