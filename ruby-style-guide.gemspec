@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
     ".gitattributes",
     ".rubocop.yml",
     ".ruby-version",
-    "CONTRIBUTING.md",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
