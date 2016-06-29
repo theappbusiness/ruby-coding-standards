@@ -11,8 +11,8 @@ set of guidelines we all should adhere to.
 * [sandi_meter][10]: "Static analysis tool for checking your Ruby code for [Sandi Metz' four rules][11]."
 * [RubyCritic][5]: "RubyCritic is a gem that wraps around static analysis gems
   such as [Reek][6], [Flay][7] and [Flog][8] to provide a quality report of your Ruby code."
-* [rails_best_practices][9]: "rails_best_practices is a code metric tool to check the quality of Rails code."
 * [bundler-audit][3]: "Checks for vulnerable versions of gems in `Gemfile.lock`."
+* [rails_best_practices][9]: "rails_best_practices is a code metric tool to check the quality of Rails code."
 * [Brakeman][4]: "Brakeman is a static analysis tool which checks Ruby on Rails
   applications for security vulnerabilities."
 
