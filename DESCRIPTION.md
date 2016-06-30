@@ -50,7 +50,7 @@ RubyCritic itself uses the tools [Reek][6], [Flay][7] and [Flog][8] to analyse t
 * [Flog][8] checks for code readability and
 complexity.
 
- While exact threshold values for both frequency and severity of those aspects are still to be determined,
+While exact threshold values for both frequency and severity of those aspects are still to be determined,
 we strive to keep them as low as possible and treat cumulations of these values as an alarm signal which has to be
 looked into and discussed.
 
@@ -67,9 +67,9 @@ To check the integrity of the required gems, the software [bundler-audit][3] is 
 
 ### Quality of Rails code
 
-Best practices exist for writing Rails applications code. The exhaustive list of the best practices can be found [here][14].
+Best practices exist for writing Rails applications code. The exhaustive list of the best practices can be found [here][15].
 
-To ensure the quality of our Rails code, the code metric tool [rails_best_practices][9] is used. All the features covered by this tool can be found [here][15], among these features:
+To ensure the quality of our Rails code, the code metric tool [rails_best_practices][9] is used. All the features covered by this tool can be found [here][14], among these features:
 * protect against mass assignment
 * restrict auto-generated routes
 * avoid needless deep nesting.
@@ -78,11 +78,11 @@ To ensure the quality of our Rails code, the code metric tool [rails_best_practi
 
 Security vulnerabilities such as SQL injection, Cross Site Scripting, command injection... must be tackled.
 
-A lot of known security vulnerabilities are identified in the Ruby On Rails' [security Guide][13].
+A lot of known security vulnerabilities are identified in the [Ruby On Rails' security Guide][13].
 This manual also gives countermeasures for the identified security vulnerabilities.
 In order to be sure that all the common security problems are reviewed, a systematic and automatic scan has to be performed.
 
-To achieve this point, [Brakeman][4] is used. Brakeman is an open source vulnerability scanner.
+To achieve this point,the tool [Brakeman][4] is used. Brakeman is an open source vulnerability scanner.
 It will basically perform static analysis of the source code, running the application is not required.
 
 ###
