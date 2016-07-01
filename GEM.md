@@ -11,8 +11,8 @@ set of guidelines we all should adhere to.
 * [sandi_meter][10]: "Static analysis tool for checking your Ruby code for [Sandi Metz' four rules][11]."
 * [RubyCritic][5]: "RubyCritic is a gem that wraps around static analysis gems
   such as [Reek][6], [Flay][7] and [Flog][8] to provide a quality report of your Ruby code."
-* [rails_best_practices][9]: "rails_best_practices is a code metric tool to check the quality of Rails code."
 * [bundler-audit][3]: "Checks for vulnerable versions of gems in `Gemfile.lock`."
+* [rails_best_practices][9]: "rails_best_practices is a code metric tool to check the quality of Rails code."
 * [Brakeman][4]: "Brakeman is a static analysis tool which checks Ruby on Rails
   applications for security vulnerabilities."
 
@@ -37,6 +37,8 @@ You should then be able to run this to execute checks and produce reports:
   $ check_code [OPTIONS]
   ```
 
+Please see the below paragraph for the common options.
+
 For runtime options to run specific checks:
 
   ```
@@ -44,6 +46,17 @@ For runtime options to run specific checks:
   ```
 
 ## Usage and output
+
+In the paragraphs below, the syntax is the following: "Command (`OPTION`)".
+
+Where:
+- "Command" stands for the specific command you want to launch
+- `OPTION` is the suffix that you have add to the `check_code` command to launch your specific command.
+
+### Whole suite (`-A`)
+
+Launching all the tools in a row is possible.
+All the tools are described in the file [DESCRIPTION.md](DESCRIPTION.md).
 
 ### RuboCop (`-C`)
 
