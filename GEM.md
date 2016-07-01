@@ -37,6 +37,8 @@ You should then be able to run this to execute checks and produce reports:
   $ check_code [OPTIONS]
   ```
 
+Please see the below paragraph for the common options.
+
 For runtime options to run specific checks:
 
   ```
@@ -44,6 +46,17 @@ For runtime options to run specific checks:
   ```
 
 ## Usage and output
+
+In the paragraphs below, the syntax is the following: "Command (`OPTION`)".
+
+Where:
+- "Command" stands for the specific command you want to launch
+- `OPTION` is the suffix that you have add to the `check_code` command to launch your specific command.
+
+### Whole suite (`-A`)
+
+Launching all the tools in a row is possible.
+All the tools are described in the file [DESCRIPTION.md](DESCRIPTION.md).
 
 ### RuboCop (`-C`)
 

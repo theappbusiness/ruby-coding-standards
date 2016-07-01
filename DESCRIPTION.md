@@ -24,10 +24,10 @@ changes.
 
 At this time we are in full agreement with the [Community Ruby-Style-Guide][1].
 
-### [Sandi Metz' four rules][11]
+### Sandi Metz' four rules
 
 In order to achieve a maximum of readability, class decomposition, class specialization, cleanliness and to keep
-complexity low, Sandi Metz proposed the following four rules:
+complexity low, Sandi Metz proposed the following [four rules][11]:
 
 1. Classes can be no longer than one hundred lines of code.
 2. Methods can be no longer than five lines of code.
@@ -63,7 +63,9 @@ Several problems are identified, among them:
 * misspelling of the gems' names, that can lead to insecure gems
 * gem's version is obsolete, that can lead to security vulnerability.
 
-To check the integrity of the required gems, the software [bundler-audit][3] is used. It basically screens the `Gemfile.lock` and mainly makes sure that the specified gems are healthy.
+To check the integrity of the required gems, the software [bundler-audit][3] is used.
+It basically screens the `Gemfile.lock` and mainly makes sure that the specified gems are healthy.
+The exhaustive list of all known vulnerabilities that bundler-audit checks can be found [here][16].
 
 ### Quality of Rails code
 
@@ -82,7 +84,7 @@ A lot of known security vulnerabilities are identified in the [Ruby On Rails' se
 This manual also gives countermeasures for the identified security vulnerabilities.
 In order to be sure that all the common security problems are reviewed, a systematic and automatic scan has to be performed.
 
-To achieve this point,the tool [Brakeman][4] is used. Brakeman is an open source vulnerability scanner.
+To achieve this point, the tool [Brakeman][4] is used. Brakeman is an open source vulnerability scanner.
 It will basically perform static analysis of the source code, running the application is not required.
 
 ###
@@ -103,3 +105,4 @@ It will basically perform static analysis of the source code, running the applic
 [13]: http://guide.rubyonrails.org/security.html
 [14]: http://rails-bestpractices.com
 [15]: https://github.com/bbatsov/rails-style-guide
+[16]: https://github.com/rubysec/ruby-advisory-db
